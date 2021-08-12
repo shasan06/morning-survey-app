@@ -6,19 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.TimePicker
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.archelocapp_1.R
 import com.example.archelocapp_1.databinding.ActivityStartSurveyBinding
-import com.example.archelocapp_1.viewmodels.SuspectedNestViewModel
+import com.example.archelocapp_1.viewmodels.MorningSurveyViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
+//Morning survey fragment
 class StartSurveyFragment : Fragment(){
 
     private lateinit var binding: ActivityStartSurveyBinding
-    private val suspectedNestViewModel: SuspectedNestViewModel by viewModels()
+    private val morningSurveyViewModel: MorningSurveyViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -45,6 +47,59 @@ class StartSurveyFragment : Fragment(){
     private fun listeners() {
         binding.previousButton.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.submit.setOnClickListener {
+            //1 Area field taking data from ui id areatext and storing into a variable area
+            val area = binding.AreaText.text.toString()
+            //Setingup Calendar to collect date selected from date Picker
+            val day: Int = binding.datePicker.getDayOfMonth()
+            val month: Int = binding.datePicker.getMonth()
+            val year: Int = binding.datePicker.getYear()
+            val calendar: Calendar = Calendar.getInstance()
+            calendar.set(year, month, day)
+            val sdf = SimpleDateFormat("dd-MM-yyyy")
+            val formatedDate: String = sdf.format(calendar.getTime())
+            //2 Date
+            val date = formatedDate
+            //3 Beach
+            val beach = binding.BeachText.text.toString()
+            //4 sector
+            val sector = binding.SectorText.text.toString()
+            //5 subsector
+            val subsector = binding.SubSectorText.text.toString()
+            //6 emergence_event string
+            val emergence_event = binding.EmergenceEventText.text.toString()
+            //7 nest
+            var nest: String = binding.NestText.text.toString()
+            //8 distance_to_sea
+            val distance_to_sea = binding.DistancetoSeaText.toString()
+            //9 track_type
+            val track_type = binding.TrackTypeText.text.toString()
+            //10 non_nesting_attempts
+            val non_nesting_attempts = binding.NonNestingAttemptsText.text.toString()
+            //11 tags
+            val tags = binding.tagsText.text.toString()
+            //12 comments
+            val comment = binding.CommentsText.text.toString()
+            //13 photo_id
+            val photo_id = binding.photoIDText.text.toString()
+            // Get location from fusded location provider for survey location
+
+//            viewModel.fusedLocationClient?.lastLocation
+//                ?.addOnSuccessListener { location : Location? ->
+//                    if (location != null) {
+//                        viewModel.newSurvey.gps_latitude = location.latitude.toString()
+//                        viewModel.newSurvey.gps_longitude = location.longitude.toString()
+//                    }
+//                }
+
+
+            //val morningSurvey: MorningSurvey = MorningSurvey() can pass this object
+            morningSurveyViewModel.submitData(area = area, dateData = date, beach = beach, sector = sector,
+                subsector = subsector, emergence_event= emergence_event, nest = nest, distance_to_sea = distance_to_sea,
+                track_type = track_type ,non_nesting_attempts = non_nesting_attempts, tags = tags,
+                comment = comment, photo_id = photo_id)
         }
 
         binding.nextButton.setOnClickListener {
