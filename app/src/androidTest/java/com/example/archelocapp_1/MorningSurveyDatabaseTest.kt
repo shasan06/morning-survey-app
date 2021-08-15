@@ -51,7 +51,7 @@ class MorningSurveyDatabaseTest {
 }
 
 
-//Some of the problems faced that took a lot of the time
+//Some of the problems faced by the kapt dependencies in android studio  that took a lot of the time
 //problem 1
 
 //having alot of kapt issues if I use kotlin version 1.4 it will give error as below
@@ -62,10 +62,17 @@ class MorningSurveyDatabaseTest {
 //Solution to problem 1 as per https://forums.bignerdranch.com/t/solved-execution-failed-for-task-kaptdebugkotlin/17431/4
 // downgrade the  kotlin version from buildscript.ext.kotlin_version=“1.4.21” to “1.3.21 inorder to resolve
 
+//Problem 2
 //But if I downgrade Problem 2 arises
 //kapt\morning-survey-app\app\src\main\java\com\example\archelocapp_1\others\StartSurvey.kt: (46, 14): 'also((T) -> Unit): T' is only available
 // since Kotlin 1.3.50 and cannot be used in Kotlin 1.3
 //that is unit testing is not supported
 
-//Solution to problem 2 used the version 1.4 first to test the test case and when the test case passed then
-//downgraded the version to avoid other errors
+//Solution to problem 2 used the version 1.3.50 in the build. gradle project that supports both
+
+
+//Problem 3
+//e: C:\Users\Sabrina1\Desktop\App work\morning
+//
+//survey testing for kapt\morning-survey-app\app\src\main\java\com\example\archelocapp_1\ui\LoginFragment.kt:
+//(50, 44): Unresolved reference: of

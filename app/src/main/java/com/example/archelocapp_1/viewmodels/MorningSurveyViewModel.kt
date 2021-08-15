@@ -78,6 +78,6 @@ class MorningSurveyViewModel(val context: Context, val surveyrepo: MorningSurvey
 //to store the data
 //the flow of data is from fragment (ui) to viewmodel to repository to dao interface and that will submit data into the database
 //the sequence is given below
-//ui--viewmodel--repository---dao interface will be inserting to the room database
+//ui(Start Survey Fragment)-->viewmodel(Morning SurveyViewModel)-->repository(Morning Survey Repository)--->dao interface(Morning Survey Database DAO) will be inserting to the room database
 // to get the data from database the sequence is given below
 //ui-vm-repo-dao-repo-vm-fragm
